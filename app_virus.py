@@ -68,20 +68,27 @@ Y = rk4_solver(pSEIRS_rhs, y0, t, params)
 S, E, I, R = Y.T
 
 # ==============================
-# PLOTS
+# PLOTS (Compact version)
 # ==============================
 st.subheader("📊 Evolution of Compartments")
-fig, ax = plt.subplots(figsize=(9, 5))
+
+# Make a smaller, tighter figure
+fig, ax = plt.subplots(figsize=(7, 3))  # smaller height
 ax.plot(t, S, label="S(t) – Susceptible", color='tab:blue')
 ax.plot(t, E, label="E(t) – Exposed", color='tab:orange')
 ax.plot(t, I, label="I(t) – Infectious", color='tab:green')
 ax.plot(t, R, label="R(t) – Recovered", color='tab:red')
-ax.set_xlabel("Time (days)")
-ax.set_ylabel("Fraction of population")
-ax.set_title("pSEIRS Model Dynamics")
-ax.legend()
-ax.grid(True)
-st.pyplot(fig)
+
+ax.set_xlabel("Time (days)", fontsize=10)
+ax.set_ylabel("Fraction", fontsize=10)
+ax.set_title("pSEIRS Model Dynamics", fontsize=12)
+ax.legend(fontsize=8, ncol=2, loc='upper right')
+ax.grid(True, alpha=0.3)
+
+# Reduce white margins
+plt.tight_layout(pad=1.0)
+st.pyplot(fig, use_container_width=True)
+
 
 # ==============================
 # EXTRA ANALYSIS
@@ -97,3 +104,4 @@ st.info("""
 🧠 *Tip:* Try reducing `p` to simulate loss of immunity, or increasing `ω` to introduce a longer latency.
 Notice how infection persistence and oscillations change dynamically.
 """)
+
